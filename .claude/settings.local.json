@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest:*)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tailwindcss:*)",
+      "Bash(npx tsc --init)",
+      "Bash(npm uninstall:*)",
+      "Bash(npx husky init)",
+      "Bash(npm run lint)",
+      "Bash(npx next lint:*)",
+      "Bash(npm run type-check:*)",
+      "Bash(npm run test:unit:*)",
+      "Bash(npm run dev:*)",
+      "Bash(git config:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
