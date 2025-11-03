@@ -26,16 +26,26 @@ export async function signUp(data: SignUpData): Promise<{ user: User | null; err
 
   try {
     // First, check if username is available
-    const { data: existingUser } = await supabase
+    const { data: existingUser, error: checkError } = await supabase
       .from('profiles')
       .select('username')
       .eq('username', data.username)
-      .single();
+      .maybeSingle();
 
+    // If we got data back, username is taken
     if (existingUser) {
       return {
         user: null,
         error: { message: 'Username already taken', field: 'username' },
+      };
+    }
+
+    // Ignore "not found" errors - that's what we want
+    // But if there's a real error (not PGRST116), return it
+    if (checkError && checkError.code !== 'PGRST116') {
+      return {
+        user: null,
+        error: { message: checkError.message },
       };
     }
 
